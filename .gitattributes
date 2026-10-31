@@ -1,0 +1,15 @@
+* text=auto
+
+# Kod i konfiguracja
+*.cpp text eol=crlf
+*.h   text eol=crlf
+*.cs  text eol=crlf
+*.ini text eol=crlf
+*.ps1 text eol=crlf
+*.md  text eol=lf
+*.uproject text eol=crlf
+
+# Assety Unreala i obrazy – binarne (bez diffów i konwersji końców linii)
+*.uasset binary
+*.umap   binary
+*.png    binary

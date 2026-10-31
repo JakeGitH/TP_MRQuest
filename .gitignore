@@ -1,0 +1,28 @@
+# Unreal – pliki generowane
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# IDE
+.vs/
+.idea/
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+
+# Pluginy Meta (MetaXR, ISDK, MRUK) instaluje się w silniku – nie trafiają do repo
+Plugins/MetaXR/
+Plugins/MetaXRInteraction/
+Plugins/OculusXR/
+Plugins/OculusInteraction/
+Plugins/MRUtilityKit/
+
+# Systemowe
+Thumbs.db
+Desktop.ini
+.DS_Store
