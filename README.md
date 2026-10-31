@@ -5,7 +5,8 @@ A C++ project template for **Unreal Engine 5.6** that starts every new project a
 
 - **Passthrough** – the real room as the background (persistent passthrough, underlay),
 - **Hand tracking** with **Meta XR Interaction SDK** hand rigs (grab, poke, ray interactors ready to use),
-- Android / Quest project settings already configured (Vulkan, Arm64, OpenXR, hands only).
+- Android / Quest project settings already configured (Vulkan, Arm64, OpenXR, hands only),
+- Guardian boundary grid hidden by default (passthrough shows the real room anyway).
 
 After installation the template appears in **New Project → Games → "MR Quest 3 (Passthrough + Hands)"**.
 Unreal renames `TP_MRQuest` to your project name in all classes, modules and config files.
@@ -76,6 +77,7 @@ Before publishing, change **Project Settings → Platforms → Android → Packa
 | Hands not visible | Hand tracking disabled on the headset (Settings → Movement tracking → Hand tracking) |
 | Template not listed | Restart the editor; check that `UE_5.6/Templates/TP_MRQuest` exists |
 | Project fails to open / build | Meta XR or Meta XR Interaction SDK not installed in the engine |
+| Want the Guardian grid back | Project Settings → Meta XR → uncheck *Default Is Boundary Visibility Suppressed* |
 
 Logs (`adb logcat -s UE`), category `LogYourProject`:
 `Persistent passthrough initialized`, `Left/Right hand rig ready`, `Hand input mapping context added`.

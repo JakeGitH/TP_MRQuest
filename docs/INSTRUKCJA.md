@@ -64,6 +64,10 @@ Gogle: tryb dewelopera w aplikacji Meta Horizon, USB debugging zaakceptowany w g
 - **`L_MR`**: pusta mapa startowa – tylko światło i PlayerStart.
 - **Config**: Vulkan, Arm64, Meta Quest 3/3S, `HandsOnly`, passthrough włączony, forward shading + MSAA,
   `r.PostProcessing.PropagateAlpha=True`.
+- **Guardian ukryty**: `bBoundaryVisibilitySupportEnabled=True` + `bDefaultBoundaryVisibilitySuppressed=True`
+  (Project Settings → Meta XR → *Boundary Visibility Support* / *Default Is Boundary Visibility Suppressed*).
+  Działa tylko z włączonym passthrough; dodaje do manifestu `com.oculus.permission.BOUNDARY_VISIBILITY`.
+  Chcesz siatkę z powrotem – odznacz *Default Is Boundary Visibility Suppressed*.
 
 Rozbudowuj `BP_MRPawn` / `BP_MRGameMode` albo klasy C++. Assety trzymaj w `Content/MRTemplate/`
 lub własnych folderach.
