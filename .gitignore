@@ -26,3 +26,6 @@ Plugins/MRUtilityKit/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Notatki robocze (lokalnie, nie w repo)
+CLAUDE.md
