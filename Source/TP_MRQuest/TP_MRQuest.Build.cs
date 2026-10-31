@@ -1,5 +1,7 @@
-// Szablon MR Quest 3 – moduł główny.
-// Przy tworzeniu projektu z szablonu nazwa modułu zostanie zamieniona na nazwę projektu.
+// MR Quest 3 template - main game module.
+// When a project is created from the template, the module name is replaced with the project name.
+// Keep template source files ASCII-only: Unreal re-saves files with non-ASCII characters as UTF-16,
+// which the Android (clang) compiler rejects.
 
 using UnrealBuildTool;
 
@@ -22,21 +24,21 @@ public class TP_MRQuest : ModuleRules
 			"XRBase"
 		});
 
-		// Nazwy sprawdzone w Engine/Plugins/Marketplace/MetaXR i MetaXRInteraction/Source.
+		// Module names verified in Engine/Plugins/Marketplace/MetaXR and MetaXRInteraction/Source.
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
 			"OculusInteraction",          // ISDK: grabbable, poke, ray
-			"OculusInteractionPrebuilts", // ISDK: rigi i wizualizacja dłoni
-			"OculusXRHMD",                // EOculusXRPassthroughLayerOrder, kształty warstw passthrough
+			"OculusInteractionPrebuilts", // ISDK: hand rigs and hand visuals
+			"OculusXRHMD",                // EOculusXRPassthroughLayerOrder, passthrough layer shapes
 			"OculusXRPassthrough"         // UOculusXRPassthroughSubsystem (persistent passthrough)
 		});
 
-		// Odkomentuj, gdy zaczniesz używać tych funkcji z C++.
+		// Uncomment when you start using these features from C++.
 		// PrivateDependencyModuleNames.AddRange(new string[]
 		// {
-		// 	"OculusXRAnchors",     // anchory przestrzenne
-		// 	"OculusXRScene",       // scena / pokój
-		// 	"MRUtilityKit"         // Meta MR Utility Kit (wymaga włączonego pluginu MRUK)
+		// 	"OculusXRAnchors",     // spatial anchors
+		// 	"OculusXRScene",       // scene / room
+		// 	"MRUtilityKit"         // Meta MR Utility Kit (requires the MRUK plugin enabled)
 		// });
 	}
 }

@@ -36,7 +36,7 @@ ATP_MRQuestPawn::ATP_MRQuestPawn()
 	MotionControllerRight->SetupAttachment(VROrigin);
 	MotionControllerRight->SetTrackingMotionSource(FName(TEXT("Right")));
 
-	// Rigi dłoni ISDK muszą być bezpośrednimi dziećmi motion controllera, żeby znaleźć dane śledzenia.
+	// ISDK hand rigs must be direct children of a motion controller to find their tracking data.
 	LeftHandRig = CreateDefaultSubobject<UIsdkHandRigComponentLeft>(TEXT("LeftHandRig"));
 	LeftHandRig->SetupAttachment(MotionControllerLeft);
 
@@ -53,7 +53,7 @@ ATP_MRQuestPawn::ATP_MRQuestPawn()
 
 void ATP_MRQuestPawn::BeginPlay()
 {
-	// Przed Super::BeginPlay, które uruchamia BeginPlay rigów.
+	// Bind before Super::BeginPlay, which begins play on the rigs.
 	LeftHandRig->DataSourcesReady.AddDynamic(this, &ATP_MRQuestPawn::HandleLeftHandDataSourcesReady);
 	RightHandRig->DataSourcesReady.AddDynamic(this, &ATP_MRQuestPawn::HandleRightHandDataSourcesReady);
 
@@ -116,7 +116,7 @@ void ATP_MRQuestPawn::StartPassthrough()
 		return;
 	}
 
-	// Outer = subsystem, żeby kształt żył tak długo jak trwała warstwa, a nie ten pawn.
+	// Outer is the subsystem so the shape lives as long as the persistent layer, not this pawn.
 	UOculusXRStereoLayerShapeReconstructed* Shape =
 		NewObject<UOculusXRStereoLayerShapeReconstructed>(PassthroughSubsystem);
 	Shape->LayerOrder = PassthroughLayerOrder_Underlay;
@@ -125,7 +125,7 @@ void ATP_MRQuestPawn::StartPassthrough()
 	FOculusXRPersistentPassthroughParameters Parameters;
 	Parameters.bVisible = true;
 	Parameters.Shape = Shape;
-	// W edytorze Shape jest odrzucany i odtwarzany z zapisanych wartości, więc też muszą być wypełnione (domyślnie Overlay).
+	// Editor builds discard Shape and rebuild it from cached values, so they must be filled too (default is Overlay).
 	Parameters.ApplyShape();
 
 	FOculusXRPassthrough_LayerResumed_Single LayerResumed;

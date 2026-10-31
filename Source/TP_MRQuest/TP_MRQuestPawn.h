@@ -13,10 +13,10 @@ class UIsdkHandRigComponentRight;
 class UInputMappingContext;
 
 /**
- * Bazowy pawn MR dla Meta Quest 3 (przeniesiony z MRSimulatorBeEco, bez logiki gry).
- * Struktura: VROrigin -> Camera (śledzi HMD), MotionControllerLeft/Right -> rigi dłoni ISDK (grab/poke/ray).
- * Passthrough (persistent, Underlay) startuje w BeginPlay.
- * Nie dodawaj w Blueprincie komponentów Oculus XR Hand ani drugiego passthrough – będą zdublowane.
+ * Base MR pawn for Meta Quest 3 / 3S.
+ * Layout: VROrigin -> Camera (follows the HMD), MotionControllerLeft/Right -> ISDK hand rigs (grab/poke/ray).
+ * Persistent passthrough (underlay) starts in BeginPlay.
+ * Do not add Oculus XR Hand components or a second passthrough layer in Blueprint - they would be duplicated.
  */
 UCLASS()
 class TP_MRQUEST_API ATP_MRQuestPawn : public APawn
@@ -36,11 +36,11 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void NotifyControllerChanged() override;
 
-	/** Punkt odniesienia przestrzeni gracza (podłoga). */
+	/** Origin of the player's tracking space (floor). */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "MR|Components")
 	TObjectPtr<USceneComponent> VROrigin;
 
-	/** Kamera przypięta do gogli. */
+	/** Camera locked to the headset. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "MR|Components")
 	TObjectPtr<UCameraComponent> Camera;
 
@@ -56,11 +56,11 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "MR|Components")
 	TObjectPtr<UIsdkHandRigComponentRight> RightHandRig;
 
-	/** LocalFloor trzyma Z = 0 na prawdziwej podłodze (tego oczekuje m.in. MRUK). */
+	/** LocalFloor keeps Z = 0 on the real floor, which MRUK room geometry expects. */
 	UPROPERTY(EditDefaultsOnly, Category = "MR|Tracking")
 	TEnumAsByte<EHMDTrackingOrigin::Type> TrackingOrigin = EHMDTrackingOrigin::LocalFloor;
 
-	/** ISDK sam nie rejestruje swojego mapping contextu; bez niego akcje pinch nie odpalają się na Meta XR. */
+	/** ISDK does not register its hand mapping context itself; without it pinch input actions never fire on Meta XR. */
 	UPROPERTY(EditDefaultsOnly, Category = "MR|Input")
 	TObjectPtr<UInputMappingContext> HandInputMappingContext;
 
@@ -70,7 +70,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "MR|Passthrough")
 	bool bStartPassthrough = true;
 
-	/** Krycie obrazu passthrough; poniżej 1 przyciemnia prawdziwy pokój za wirtualną treścią. */
+	/** Passthrough texture opacity; below 1 dims the real room behind virtual content. */
 	UPROPERTY(EditDefaultsOnly, Category = "MR|Passthrough", meta = (ClampMin = "0.0", ClampMax = "1.0"))
 	float PassthroughOpacity = 1.0f;
 
